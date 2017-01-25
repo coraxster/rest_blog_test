@@ -35,4 +35,11 @@ class User extends Model implements
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function resetToken(){
+        $faker = \Faker\Factory::create();
+        $this->token = $faker->password(255);
+        $this->save();
+        return $this;
+    }
 }

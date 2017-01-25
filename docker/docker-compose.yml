@@ -1,0 +1,18 @@
+mysql:
+  image: mysql:5.5.45
+  ports:
+    - "3306:3306"
+  environment: 
+   - MYSQL_ROOT_PASSWORD=12345678
+   - MYSQL_DATABASE=posts
+web:
+  image: "webdevops/php-nginx:ubuntu-15.10"
+  ports:
+   - "80:80"
+  links:
+   - "mysql:db"
+  tty: true
+  volumes:
+   - ../.:/app
+  environment:
+   - "WEB_DOCUMENT_ROOT=/app/public/"

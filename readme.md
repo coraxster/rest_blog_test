@@ -12,7 +12,9 @@
 4. Запускал сервис через docker-compose в контейнерах. (см. папку docker ). 
 Для старта. В папке docker
 docker-compose up
+
 docker exec -t -i docker_web_1 php composer.phar install
+
 docker exec -t -i docker_web_1 vendor/phpunit/phpunit/phpunit
 
 5. Сервис тестил в Paw. В папке tests есть тест. (только для маков)

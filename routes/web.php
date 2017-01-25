@@ -14,6 +14,7 @@ use Illuminate\Routing\Router;
 | contains the "web" middleware group. Now create something great!
 |
 */
+$router->post('/json/auth', 'TokenController@getToken');
 
 $router->get('/', function () {
     return view('welcome');

@@ -27,6 +27,10 @@ class User extends Model implements
         'name', 'email', 'password',
     ];
 
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -38,7 +42,7 @@ class User extends Model implements
 
     public function resetToken(){
         $faker = \Faker\Factory::create();
-        $this->token = $faker->password(255);
+        $this->token = $faker->md5;
         $this->save();
         return $this;
     }

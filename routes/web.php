@@ -16,6 +16,12 @@ use Illuminate\Routing\Router;
 */
 $router->post('/json/auth', 'TokenController@getToken');
 
+$router->get('/json/list_posts', 'PostController@listPosts');
+$router->post('/json/add_post', 'PostController@addPost');
+$router->post('/json/edit_post', 'PostController@editPost');
+$router->post('/json/delete_post', 'PostController@deletePost');
+
+
 $router->get('/', function () {
     return view('welcome');
 });

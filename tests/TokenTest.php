@@ -16,7 +16,7 @@ class TokenTest extends TestCase
     	$faker = Faker\Factory::create();
     	$userData = [
     		'email' => $faker->unique()->safeEmail,
-    		'password' => 'password' //$faker->unique()->password()
+    		'password' => $faker->unique()->password()
     	];
         $user = factory(\App\User::class)
         	->create([
@@ -31,6 +31,22 @@ class TokenTest extends TestCase
                 'email' => $userData['email'],
 	    		'token' => $response->original
             ]);
-
+    }
+    public function testGetTokenFail()
+    {
+        $faker = Faker\Factory::create();
+        $userData = [
+            'email' => $faker->unique()->safeEmail,
+            'password' => $faker->unique()->password()
+        ];
+        $user = factory(\App\User::class)
+            ->create([
+                'email' => $userData['email'],
+                'password' => bcrypt($userData['password'])
+            ]);
+        $response = $this->post('/json/auth', [
+                'email' => $userData['email'],
+                'password' => 'super_fake_password'
+            ])->assertResponseStatus(403);
     }
 }
